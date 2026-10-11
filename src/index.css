@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* حالت تاریک با کلاس .dark روی <html> کنترل می‌شود (نه فقط تنظیمات سیستم) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- توکن‌های طراحی (رنگ، فونت، سایه) ---------- */
+@theme {
+  --font-sans: "Inter Variable", "Vazirmatn Variable", system-ui, sans-serif;
+  --font-fa: "Vazirmatn Variable", "Inter Variable", system-ui, sans-serif;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -12px rgb(15 23 42 / 0.12);
+}
+
+/* در حالت فارسی فونت وزیرمتن اولویت دارد */
+html[lang="fa"] body {
+  font-family: var(--font-fa);
+}
+
+body {
+  @apply bg-slate-50 text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-200;
+}
+
+/* ---------- کلاس‌های قابل استفاده مجدد ----------
+   استفاده: class="btn btn-primary" یا class="btn btn-ghost" */
+@layer components {
+  .card {
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-card dark:border-slate-800 dark:bg-slate-900;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition
+      focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-brand-600 text-white hover:bg-brand-700;
+  }
+
+  .btn-ghost {
+    @apply border border-slate-200 bg-white text-slate-700 hover:bg-slate-50
+      dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none transition
+      placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15
+      dark:border-slate-700 dark:bg-slate-900;
+  }
+
+  .icon-btn {
+    @apply inline-grid size-9 place-items-center rounded-xl text-slate-500 transition hover:bg-slate-100 hover:text-slate-900
+      dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white;
+  }
+}
+
+/* اعداد جدول‌ها هم‌عرض باشند تا ستون‌ها نلرزند */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* اسکرول‌بار ظریف */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(148 163 184 / 0.4) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}

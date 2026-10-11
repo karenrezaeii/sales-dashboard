@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sales admin dashboard built with React, TypeScript and Tailwind CSS — bilingual (English / Persian RTL) with dark mode." />
+    <title>Sales Dashboard</title>
+    <script>
+      // اعمال تم و زبان ذخیره‌شده قبل از رندر (جلوگیری از چشمک زدن)
+      (function () {
+        try {
+          var s = JSON.parse(localStorage.getItem('dashboard-settings') || '{}');
+          var dark = s.theme ? s.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', dark);
+          if (s.lang === 'fa') { document.documentElement.lang = 'fa'; document.documentElement.dir = 'rtl'; }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
